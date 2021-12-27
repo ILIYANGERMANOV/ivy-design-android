@@ -3,12 +3,19 @@ package com.ivy.design
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.google.accompanist.insets.systemBarsPadding
 import com.ivy.design.api.IvyUI
 import com.ivy.design.api.systems.IvyWalletDesign
-import com.ivy.design.level0.style
+import com.ivy.design.level0.colorAs
+import com.ivy.design.level1.IvyText
+import com.ivy.design.level1.SpacerV
+import com.ivy.design.level1.padding
 import com.ivy.design.utils.IvyPreview
 
 class MainActivity : ComponentActivity() {
@@ -29,12 +36,27 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun UI() {
-        Text(
-            text = "Hello, Ivy Design!",
-            style = UI.typo.h1.style(
-                color = UI.colors.ivy
+        Column(
+            Modifier
+                .fillMaxSize()
+                .systemBarsPadding()
+        ) {
+            SpacerV(24.dp)
+
+            IvyText(
+                text = "Hello, Ivy Design!",
+                typo = UI.typo.h1.colorAs(UI.colors.ivy),
+                padding = padding(horizontal = 16.dp)
             )
-        )
+
+            SpacerV(12.dp)
+
+            IvyText(
+                text = "It's just the beginning...",
+                typo = UI.typo.b1,
+                padding = padding(horizontal = 16.dp)
+            )
+        }
     }
 
     @Preview
