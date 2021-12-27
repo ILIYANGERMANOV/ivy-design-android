@@ -3,16 +3,13 @@ package com.ivy.design
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.insets.systemBarsPadding
 import com.ivy.design.api.IvyUI
 import com.ivy.design.api.systems.IvyWalletDesign
 import com.ivy.design.level0.colorAs
+import com.ivy.design.level1.ColumnRoot
 import com.ivy.design.level1.IvyText
 import com.ivy.design.level1.SpacerV
 import com.ivy.design.level1.padding
@@ -36,11 +33,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun UI() {
-        Column(
-            Modifier
-                .fillMaxSize()
-                .systemBarsPadding()
-        ) {
+        ColumnRoot {
             SpacerV(24.dp)
 
             IvyText(

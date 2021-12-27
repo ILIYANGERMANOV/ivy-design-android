@@ -14,12 +14,11 @@ fun IvyText(
     padding: IvyPadding? = null
 ) {
     Text(
-        modifier = modifier
+        modifier = Modifier
             .thenIf(padding != null) {
-                this.padding(
-                    ivyPadding = padding!!
-                )
-            },
+                padding(ivyPadding = padding!!)
+            }
+            .then(modifier),
         text = text,
         style = typo,
     )
