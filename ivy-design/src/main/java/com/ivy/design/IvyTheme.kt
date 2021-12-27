@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.compositionLocalOf
+import com.ivy.design.level0.*
 
 val LocalIvyColors = compositionLocalOf<IvyColors> { error("No IvyColors") }
 

@@ -1,4 +1,4 @@
-package com.ivy.design
+package com.ivy.design.level0
 
 import androidx.annotation.ColorInt
 import androidx.compose.foundation.background
@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.ColorUtils
+import com.ivy.design.IvyTheme
 import com.ivy.design.utils.densityScope
 
 
@@ -143,9 +144,6 @@ fun pureBlur() = IvyTheme.colors.pure.copy(alpha = 0.95f)
 
 @Composable
 fun mediumBlur() = IvyTheme.colors.medium.copy(alpha = 0.95f)
-
-@Composable
-fun gradientExpenses() = Gradient(IvyTheme.colors.pureInverse, IvyTheme.colors.gray)
 
 data class IvyColors(
     val pure: Color,

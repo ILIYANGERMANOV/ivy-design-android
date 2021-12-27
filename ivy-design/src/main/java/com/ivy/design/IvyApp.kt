@@ -25,15 +25,16 @@ fun IvyApp(
             Surface(modifier = Modifier.fillMaxSize()) {
                 ProvideWindowInsets {
                     BoxWithConstraints {
-                        ivyContext.screenWidth = with(LocalDensity.current) { maxWidth.roundToPx() }
-                        ivyContext.screenHeight =
-                            with(LocalDensity.current) { maxHeight.roundToPx() }
-
+                        ivyContext.screenWidth = with(LocalDensity.current) {
+                            maxWidth.roundToPx()
+                        }
+                        ivyContext.screenHeight = with(LocalDensity.current) {
+                            maxHeight.roundToPx()
+                        }
                         content()
                     }
                 }
             }
         }
     }
-
 }
