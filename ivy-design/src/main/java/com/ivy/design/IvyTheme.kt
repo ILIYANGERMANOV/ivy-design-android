@@ -8,40 +8,59 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.compositionLocalOf
-import com.ivy.design.level0.*
+import com.ivy.design.api.IvyDesign
+import com.ivy.design.level0.IvyColors
+import com.ivy.design.level0.IvyShapes
+import com.ivy.design.level0.IvyTypography
+import com.ivy.design.level0.White
 
 val LocalIvyColors = compositionLocalOf<IvyColors> { error("No IvyColors") }
+val LocalIvyTypography = compositionLocalOf<IvyTypography> { error("No IvyTypography") }
+val LocalIvyShapes = compositionLocalOf<IvyShapes> { error("No IvyShapes") }
 
 
-object IvyTheme {
+object UI {
     val colors: IvyColors
         @Composable
         @ReadOnlyComposable
         get() = LocalIvyColors.current
+
+    val typo: IvyTypography
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalIvyTypography.current
+
+    val shapes: IvyShapes
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalIvyShapes.current
 }
 
 @Composable
 fun IvyTheme(
     theme: Theme,
+    design: IvyDesign,
     content: @Composable () -> Unit
 ) {
-    val ivyColors = adaptIvyColors(theme)
-
-//    setStatusBarDarkTextCompat(darkText = ivyColors.isLight)
+    val colors = design.colors(theme)
+    val typography = design.typography()
+    val shapes = design.shapes()
 
     CompositionLocalProvider(
-        LocalIvyColors provides ivyColors
+        LocalIvyColors provides colors,
+        LocalIvyTypography provides typography,
+        LocalIvyShapes provides shapes
     ) {
         MaterialTheme(
-            colors = adaptTheme(ivyColors),
-            typography = adaptTypography(Typo),
-            shapes = adaptShapes(Shapes),
+            colors = adaptColors(colors),
+            typography = adaptTypography(typography),
+            shapes = adaptShapes(shapes),
             content = content
         )
     }
 }
 
-fun adaptTheme(colors: IvyColors): Colors {
+fun adaptColors(colors: IvyColors): Colors {
     return Colors(
         primary = colors.ivy,
         primaryVariant = colors.ivy1,
@@ -59,71 +78,20 @@ fun adaptTheme(colors: IvyColors): Colors {
     )
 }
 
-fun adaptShapes(shapes: IvyShapes): Shapes {
-    return Shapes(
-        large = shapes.rounded32,
-        medium = shapes.rounded24,
-        small = shapes.rounded16
-    )
-}
-
 fun adaptTypography(typography: IvyTypography): Typography {
     return Typography(
         h1 = typography.h1,
         h2 = typography.h2,
-        body1 = typography.body1,
-        body2 = typography.body2,
-        caption = typography.caption
+        body1 = typography.b1,
+        body2 = typography.b2,
+        caption = typography.c
     )
 }
 
-fun adaptIvyColors(theme: Theme): IvyColors {
-    return when (theme) {
-        Theme.LIGHT -> IvyColors(
-            pure = White,
-            pureInverse = Black,
-            gray = Gray,
-            medium = MediumWhite,
-            mediumInverse = MediumBlack,
-
-            ivy = Ivy,
-            ivy1 = IvyDark,
-
-            green = Green,
-            green1 = GreenLight,
-
-            orange = Orange,
-            orange1 = OrangeLight,
-
-            red = Red,
-            red1 = RedLight,
-
-            isLight = true
-        )
-        Theme.DARK -> IvyColors(
-            pure = Black,
-            pureInverse = White,
-            gray = Gray,
-            medium = MediumBlack,
-            mediumInverse = MediumWhite,
-
-            ivy = Ivy,
-            ivy1 = IvyLight,
-
-            green = Green,
-            green1 = GreenDark,
-
-            orange = Orange,
-            orange1 = OrangeDark,
-
-            red = Red,
-            red1 = RedDark,
-
-            isLight = false
-        )
-    }
-}
-
-enum class Theme {
-    LIGHT, DARK
+fun adaptShapes(shapes: IvyShapes): Shapes {
+    return Shapes(
+        large = shapes.r1,
+        medium = shapes.r2,
+        small = shapes.r3
+    )
 }

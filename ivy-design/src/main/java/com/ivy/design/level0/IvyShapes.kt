@@ -1,0 +1,24 @@
+package com.ivy.design.level0
+
+import androidx.compose.foundation.shape.CornerBasedShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+
+abstract class IvyShapes {
+    abstract val r1: CornerBasedShape
+    abstract val r1top: CornerBasedShape
+    abstract val r1bot: CornerBasedShape
+
+    abstract val r2: CornerBasedShape
+    abstract val r2top: CornerBasedShape
+    abstract val r2bot: CornerBasedShape
+
+    abstract val r3: CornerBasedShape
+    abstract val r3top: CornerBasedShape
+    abstract val r3bot: CornerBasedShape
+
+    abstract val r4: CornerBasedShape
+    abstract val r4top: CornerBasedShape
+    abstract val r4bot: CornerBasedShape
+
+    open val rFull: CornerBasedShape = RoundedCornerShape(percent = 50)
+}

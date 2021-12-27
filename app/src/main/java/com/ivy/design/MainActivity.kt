@@ -3,36 +3,45 @@ package com.ivy.design
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.ivy.design.ui.theme.IvyDesignTheme
+import com.ivy.design.api.IvyUI
+import com.ivy.design.api.systems.IvyWalletDesign
+import com.ivy.design.utils.IvyPreview
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            IvyDesignTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
-                }
+            IvyUI(
+                design = design()
+            ) {
+                UI()
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
+    private fun design() = object : IvyWalletDesign() {
+        override fun context() = SampleContext()
+    }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    IvyDesignTheme {
-        Greeting("Android")
+    @Composable
+    private fun UI() {
+        Text(
+            text = "Hello, Ivy Design!"
+        )
+    }
+
+    @Preview
+    @Composable
+    fun DefaultPreview() {
+        IvyPreview(
+            design = design()
+        ) {
+            UI(
+
+            )
+        }
     }
 }

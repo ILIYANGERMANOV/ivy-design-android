@@ -1,19 +1,12 @@
 package com.ivy.design.level0
 
 import androidx.annotation.ColorInt
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import androidx.core.graphics.ColorUtils
-import com.ivy.design.IvyTheme
-import com.ivy.design.utils.densityScope
+import com.ivy.design.UI
 
 
 val White = Color(0xFFFAFAFA)
@@ -109,64 +102,11 @@ val GradientOrangeDark = Gradient(OrangeDark, Color(0xFFF2CD9E))
 val GradientOrangeRevert = Gradient(Color(0xFFF2CD9E), Orange)
 val GradientIvy = Gradient(Ivy, Color(0xFFAA99FF))
 
-
-fun Modifier.gradientCutBackgroundTop(
-    endY: Dp = 32.dp
-) = composed {
-    background(
-        brush = Brush.verticalGradient(
-            colors = listOf(
-                Transparent,
-                IvyTheme.colors.pure,
-            ),
-            endY = densityScope {
-                endY.toPx()
-            }
-        )
-    ).padding(top = 16.dp)
-}
-
-fun Modifier.gradientCutBackgroundBottom(
-    paddingBottom: Dp,
-) = composed {
-    background(
-        brush = Brush.verticalGradient(
-            colors = listOf(
-                IvyTheme.colors.pure,
-                Transparent
-            ),
-        )
-    ).padding(bottom = paddingBottom)
-}
+@Composable
+fun pureBlur() = UI.colors.pure.copy(alpha = 0.95f)
 
 @Composable
-fun pureBlur() = IvyTheme.colors.pure.copy(alpha = 0.95f)
-
-@Composable
-fun mediumBlur() = IvyTheme.colors.medium.copy(alpha = 0.95f)
-
-data class IvyColors(
-    val pure: Color,
-    val pureInverse: Color,
-
-    val gray: Color,
-    val medium: Color,
-    val mediumInverse: Color,
-
-    val ivy: Color,
-    val ivy1: Color,
-
-    val green: Color,
-    val green1: Color,
-
-    val orange: Color,
-    val orange1: Color,
-
-    val red: Color,
-    val red1: Color,
-
-    val isLight: Boolean
-)
+fun mediumBlur() = UI.colors.medium.copy(alpha = 0.95f)
 
 data class Gradient(
     val startColor: Color,
@@ -181,7 +121,7 @@ data class Gradient(
         fun solid(color: Color) = Gradient(color, color)
 
         @Composable
-        fun black() = Gradient(IvyTheme.colors.gray, IvyTheme.colors.pureInverse)
+        fun black() = Gradient(UI.colors.gray, UI.colors.pureInverse)
     }
 
     fun asHorizontalBrush() = Brush.horizontalGradient(colors = listOf(startColor, endColor))

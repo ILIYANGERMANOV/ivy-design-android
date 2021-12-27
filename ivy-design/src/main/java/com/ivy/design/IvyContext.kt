@@ -4,7 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 
-open class IvyContext {
+abstract class IvyContext {
 //    var currentScreen: Screen? by mutableStateOf(null)
 //        private set
 

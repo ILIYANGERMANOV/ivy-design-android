@@ -8,19 +8,26 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.ivy.design.IvyApp
-import com.ivy.design.IvyContext
-import com.ivy.design.IvyTheme
 import com.ivy.design.Theme
+import com.ivy.design.UI
+import com.ivy.design.api.IvyDesign
+import com.ivy.design.api.IvyUI
 
 
 @Composable
-fun IvyComponentPreview(theme: Theme = Theme.LIGHT, content: @Composable BoxScope.() -> Unit) {
-    IvyAppPreview {
+fun IvyComponentPreview(
+    design: IvyDesign,
+    theme: Theme = Theme.LIGHT,
+    content: @Composable BoxScope.() -> Unit
+) {
+    IvyPreview(
+        design = design,
+        theme = theme
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(IvyTheme.colors.pure),
+                .background(UI.colors.pure),
             contentAlignment = Alignment.Center
         ) {
             content()
@@ -29,14 +36,14 @@ fun IvyComponentPreview(theme: Theme = Theme.LIGHT, content: @Composable BoxScop
 }
 
 @Composable
-fun IvyAppPreview(
+fun IvyPreview(
+    design: IvyDesign,
     theme: Theme = Theme.LIGHT,
     content: @Composable BoxWithConstraintsScope.() -> Unit
 ) {
-    val ivyContext = IvyContext()
-    ivyContext.switchTheme(theme = theme)
-    IvyApp(
-        ivyContext = ivyContext,
-        content = content
+    design.context().switchTheme(theme = theme)
+    IvyUI(
+        design = design,
+        Content = content
     )
 }
