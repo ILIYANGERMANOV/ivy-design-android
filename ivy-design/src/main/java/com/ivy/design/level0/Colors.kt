@@ -13,7 +13,7 @@ val White = Color(0xFFFAFAFA)
 val Black = Color(0xFF111114)
 
 //Primary
-val Ivy = Color(0xFF6B4DFF)
+val Purple = Color(0xFF6B4DFF)
 val Purple1 = Color(0xFFC34CFF)
 val Purple2 = Color(0xFFFF4CFF)
 
@@ -100,7 +100,7 @@ val GradientGreen = Gradient(Green, Color(0xFF49F2C8))
 val GradientOrange = Gradient(Orange, OrangeLight)
 val GradientOrangeDark = Gradient(OrangeDark, Color(0xFFF2CD9E))
 val GradientOrangeRevert = Gradient(Color(0xFFF2CD9E), Orange)
-val GradientIvy = Gradient(Ivy, Color(0xFFAA99FF))
+val GradientPurple = Gradient(Purple, Color(0xFFAA99FF))
 
 @Composable
 fun pureBlur() = UI.colors.pure.copy(alpha = 0.95f)

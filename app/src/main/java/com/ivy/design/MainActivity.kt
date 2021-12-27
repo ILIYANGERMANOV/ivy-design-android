@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.ivy.design.api.IvyUI
 import com.ivy.design.api.systems.IvyWalletDesign
+import com.ivy.design.level0.style
 import com.ivy.design.utils.IvyPreview
 
 class MainActivity : ComponentActivity() {
@@ -29,7 +30,10 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun UI() {
         Text(
-            text = "Hello, Ivy Design!"
+            text = "Hello, Ivy Design!",
+            style = UI.typo.h1.style(
+                color = UI.colors.ivy
+            )
         )
     }
 

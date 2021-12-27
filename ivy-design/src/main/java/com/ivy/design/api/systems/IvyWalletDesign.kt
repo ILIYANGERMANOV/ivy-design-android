@@ -34,7 +34,7 @@ abstract class IvyWalletDesign : IvyDesign {
             Font(R.font.raleway_extrabold, FontWeight.ExtraBold),
         )
 
-        val h1 = 42.sp
+        val h1 = 40.sp
         val h2 = 32.sp
         val b1 = 20.sp
         val b2 = 16.sp
@@ -104,7 +104,7 @@ abstract class IvyWalletDesign : IvyDesign {
                 override val medium = MediumWhite
                 override val mediumInverse = MediumBlack
 
-                override val ivy = Ivy
+                override val ivy = Purple
                 override val ivy1 = IvyDark
 
                 override val green = Green
@@ -125,7 +125,7 @@ abstract class IvyWalletDesign : IvyDesign {
                 override val medium = MediumBlack
                 override val mediumInverse = MediumWhite
 
-                override val ivy = Ivy
+                override val ivy = Purple
                 override val ivy1 = IvyLight
 
                 override val green = Green
