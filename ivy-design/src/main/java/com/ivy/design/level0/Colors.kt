@@ -141,6 +141,10 @@ fun isDarkColor(@ColorInt color: Int): Boolean {
     return ColorUtils.calculateLuminance(color) <= 0.5
 }
 
+fun Color.asBrush(): Brush {
+    return Brush.horizontalGradient(listOf(this, this))
+}
+
 fun Color.dynamicContrast(): Color {
     val pickedColor = this.toHSVSpec()
 

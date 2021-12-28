@@ -18,3 +18,12 @@ fun Modifier.thenIf(
         this.then(otherModifier())
     } else this
 }
+
+fun Modifier.thenWhen(
+    logic: Modifier.() -> Modifier?
+): Modifier {
+    val otherModifier = logic()
+    return if (otherModifier != null) {
+        this.then(otherModifier)
+    } else this
+}

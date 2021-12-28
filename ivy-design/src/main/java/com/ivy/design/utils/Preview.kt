@@ -8,15 +8,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.ivy.design.IvyContext
 import com.ivy.design.Theme
 import com.ivy.design.UI
 import com.ivy.design.api.IvyDesign
 import com.ivy.design.api.IvyUI
+import com.ivy.design.api.systems.IvyWalletDesign
 
 
 @Composable
 fun IvyComponentPreview(
-    design: IvyDesign,
+    design: IvyDesign = defaultDesign(),
     theme: Theme = Theme.LIGHT,
     content: @Composable BoxScope.() -> Unit
 ) {
@@ -46,4 +48,9 @@ fun IvyPreview(
         design = design,
         Content = content
     )
+}
+
+fun defaultDesign(): IvyDesign = object : IvyWalletDesign() {
+    override fun context(): IvyContext = object : IvyContext() {
+    }
 }
