@@ -1,11 +1,15 @@
 package com.ivy.design.level1
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ivy.design.level0.asBrush
+import com.ivy.design.utils.thenWhen
 
 sealed class Background {
     data class Solid(
@@ -44,4 +48,25 @@ sealed class Background {
     }
 
     object None : Background()
+}
+
+fun Modifier.background(background: Background): Modifier {
+    return this.thenWhen {
+        when (background) {
+            is Background.Solid -> {
+                background(
+                    brush = background.color,
+                    shape = background.shape
+                ).padding(background.padding)
+            }
+            is Background.Outlined -> {
+                border(
+                    brush = background.color,
+                    width = background.width,
+                    shape = background.shape
+                ).padding(background.padding)
+            }
+            is Background.None -> null
+        }
+    }
 }

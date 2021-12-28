@@ -1,7 +1,5 @@
 package com.ivy.design.level2
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,9 +15,9 @@ import com.ivy.design.level0.White
 import com.ivy.design.level0.colorAs
 import com.ivy.design.level0.style
 import com.ivy.design.level1.Background
+import com.ivy.design.level1.background
 import com.ivy.design.level1.padding
 import com.ivy.design.utils.IvyComponentPreview
-import com.ivy.design.utils.thenWhen
 
 @Composable
 fun Button(
@@ -44,24 +42,7 @@ fun Button(
             .clickable(
                 onClick = onClick
             )
-            .thenWhen {
-                when (background) {
-                    is Background.Solid -> {
-                        background(
-                            brush = background.color,
-                            shape = background.shape
-                        ).padding(background.padding)
-                    }
-                    is Background.Outlined -> {
-                        border(
-                            brush = background.color,
-                            width = background.width,
-                            shape = background.shape
-                        ).padding(background.padding)
-                    }
-                    is Background.None -> null
-                }
-            },
+            .background(background),
         text = text,
         style = textStyle
     )
@@ -117,7 +98,7 @@ private fun Preview_FillMaxWidth() {
         Button(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 32.dp),
+                .padding(horizontal = 16.dp),
             text = "Add task"
         ) {
 
