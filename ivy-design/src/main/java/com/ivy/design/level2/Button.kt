@@ -16,6 +16,7 @@ import com.ivy.design.level0.colorAs
 import com.ivy.design.level0.style
 import com.ivy.design.level1.Background
 import com.ivy.design.level1.background
+import com.ivy.design.level1.clipBackground
 import com.ivy.design.level1.padding
 import com.ivy.design.utils.IvyComponentPreview
 
@@ -24,7 +25,7 @@ fun Button(
     modifier: Modifier = Modifier,
     text: String,
     background: Background = Background.Solid(
-        color = UI.colors.ivy,
+        color = UI.colors.primary,
         shape = UI.shapes.rFull,
         padding = padding(
             horizontal = 24.dp,
@@ -39,6 +40,7 @@ fun Button(
 ) {
     Text(
         modifier = modifier
+            .clipBackground(background)
             .clickable(
                 onClick = onClick
             )
@@ -55,7 +57,7 @@ private fun Preview_Solid() {
         Button(
             text = "Okay",
             background = Background.Solid(
-                color = UI.colors.ivy,
+                color = UI.colors.primary,
                 shape = UI.shapes.rFull,
                 padding = padding(
                     horizontal = 24.dp,

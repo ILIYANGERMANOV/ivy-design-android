@@ -62,10 +62,10 @@ fun IvyTheme(
 
 fun adaptColors(colors: IvyColors): Colors {
     return Colors(
-        primary = colors.ivy,
-        primaryVariant = colors.ivy1,
-        secondary = colors.ivy,
-        secondaryVariant = colors.ivy1,
+        primary = colors.primary,
+        primaryVariant = colors.primary1,
+        secondary = colors.primary,
+        secondaryVariant = colors.primary1,
         background = colors.pure,
         surface = colors.pure,
         onSurface = colors.pureInverse,

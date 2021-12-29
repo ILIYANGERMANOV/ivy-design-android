@@ -104,8 +104,8 @@ abstract class IvyWalletDesign : IvyDesign {
                 override val medium = MediumWhite
                 override val mediumInverse = MediumBlack
 
-                override val ivy = Purple
-                override val ivy1 = IvyDark
+                override val primary = Purple
+                override val primary1 = IvyDark
 
                 override val green = Green
                 override val green1 = GreenLight
@@ -125,8 +125,8 @@ abstract class IvyWalletDesign : IvyDesign {
                 override val medium = MediumBlack
                 override val mediumInverse = MediumWhite
 
-                override val ivy = Purple
-                override val ivy1 = IvyLight
+                override val primary = Purple
+                override val primary1 = IvyLight
 
                 override val green = Green
                 override val green1 = GreenDark

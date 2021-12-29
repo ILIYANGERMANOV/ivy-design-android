@@ -30,7 +30,7 @@ fun Button(
     text: String,
     mode: Mode = Mode.WRAP_CONTENT,
     background: Background = Background.Solid(
-        color = UI.colors.ivy,
+        color = UI.colors.primary,
         shape = UI.shapes.rFull,
         padding = padding(
             horizontal = 24.dp,
@@ -49,6 +49,7 @@ fun Button(
 ) {
     Row(
         modifier = modifier
+            .clipBackground(background)
             .clickable(
                 onClick = onClick
             )

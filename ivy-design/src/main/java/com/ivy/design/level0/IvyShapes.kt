@@ -1,5 +1,6 @@
 package com.ivy.design.level0
 
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 
@@ -20,5 +21,6 @@ abstract class IvyShapes {
     abstract val r4top: CornerBasedShape
     abstract val r4bot: CornerBasedShape
 
-    open val rFull: CornerBasedShape = RoundedCornerShape(percent = 50)
+    val rFull: CornerBasedShape = RoundedCornerShape(percent = 50)
+    val circle = CircleShape
 }

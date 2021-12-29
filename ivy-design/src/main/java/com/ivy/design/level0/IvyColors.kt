@@ -10,8 +10,8 @@ interface IvyColors {
     val medium: Color
     val mediumInverse: Color
 
-    val ivy: Color
-    val ivy1: Color
+    val primary: Color
+    val primary1: Color
 
     val green: Color
     val green1: Color

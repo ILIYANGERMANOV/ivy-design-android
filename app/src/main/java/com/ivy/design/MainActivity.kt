@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
 
             IvyText(
                 text = "Hello, Ivy Design!",
-                typo = UI.typo.h1.colorAs(UI.colors.ivy),
+                typo = UI.typo.h1.colorAs(UI.colors.primary),
                 padding = padding(horizontal = 16.dp)
             )
 
