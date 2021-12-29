@@ -62,7 +62,7 @@ class MainActivity : ComponentActivity() {
 
             IvyText(
                 padding = padding(start = 16.dp),
-                text = "Input: $input",
+                text = "Input:\n$input",
                 typo = UI.typo.b1
             )
 
