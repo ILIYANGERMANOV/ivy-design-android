@@ -26,7 +26,7 @@ fun IvyUI(
         LocalIvyContext provides ivyContext,
     ) {
         IvyTheme(
-            theme = design.context().theme,
+            theme = ivyContext.theme,
             design = design
         ) {
             Surface(modifier = Modifier.fillMaxSize()) {
@@ -46,4 +46,9 @@ fun IvyUI(
             }
         }
     }
+}
+
+@Composable
+fun ivyContext(): IvyContext {
+    return LocalIvyContext.current
 }

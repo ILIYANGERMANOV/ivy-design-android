@@ -32,7 +32,7 @@ fun Button(
             vertical = 12.dp
         )
     ),
-    textStyle: TextStyle = UI.typo.b1.style(
+    textStyle: TextStyle = UI.typo.b2.style(
         color = White,
         textAlign = TextAlign.Center
     ),

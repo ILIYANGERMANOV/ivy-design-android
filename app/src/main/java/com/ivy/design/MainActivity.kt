@@ -3,16 +3,19 @@ package com.ivy.design
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ivy.design.api.IvyUI
+import com.ivy.design.api.ivyContext
 import com.ivy.design.api.systems.IvyWalletDesign
 import com.ivy.design.level0.colorAs
-import com.ivy.design.level1.ColumnRoot
-import com.ivy.design.level1.IvyText
-import com.ivy.design.level1.SpacerV
-import com.ivy.design.level1.padding
+import com.ivy.design.level1.*
+import com.ivy.design.level2.Button
+import com.ivy.design.level2.InputField
 import com.ivy.design.utils.IvyPreview
 
 class MainActivity : ComponentActivity() {
@@ -49,6 +52,25 @@ class MainActivity : ComponentActivity() {
                 typo = UI.typo.b1,
                 padding = padding(horizontal = 16.dp)
             )
+
+            SpacerV(32.dp)
+
+            InputField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                initialText = "Test"
+            )
+
+            SpacerV(24.dp)
+
+            val ivyContext = ivyContext()
+            Button(
+                modifier = Modifier.padding(start = 16.dp),
+                text = "Switch theme",
+            ) {
+                ivyContext.switchTheme(ivyContext.theme.inverted())
+            }
         }
     }
 

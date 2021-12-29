@@ -52,7 +52,7 @@ sealed class Background {
 }
 
 fun Modifier.background(background: Background): Modifier {
-    return this.thenWhen {
+    return thenWhen {
         when (background) {
             is Background.Solid -> {
                 background(
@@ -73,7 +73,7 @@ fun Modifier.background(background: Background): Modifier {
 }
 
 fun Modifier.clipBackground(background: Background): Modifier {
-    return this.thenWhen {
+    return thenWhen {
         when (background) {
             is Background.Solid -> {
                 clip(background.shape)

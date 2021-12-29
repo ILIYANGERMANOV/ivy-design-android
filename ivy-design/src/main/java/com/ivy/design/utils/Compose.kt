@@ -16,20 +16,18 @@ fun <T> densityScope(densityScope: @Composable Density.() -> T): T {
 
 fun Modifier.thenIf(
     condition: Boolean,
-    otherModifier: Modifier.() -> Modifier
-): Modifier {
-    return if (condition) {
-        this.then(otherModifier())
+    otherModifier: @Composable Modifier.() -> Modifier
+): Modifier = composed {
+    //Cannot use Modifier#then() because it stacks the previous modifiers multiple times
+    if (condition) {
+        this.otherModifier()
     } else this
 }
 
 fun Modifier.thenWhen(
-    logic: Modifier.() -> Modifier?
-): Modifier {
-    val otherModifier = logic()
-    return if (otherModifier != null) {
-        this.then(otherModifier)
-    } else this
+    logic: @Composable Modifier.() -> Modifier?
+): Modifier = composed {
+    this.logic() ?: this
 }
 
 fun Modifier.consumeClicks() = clickableNoIndication {
