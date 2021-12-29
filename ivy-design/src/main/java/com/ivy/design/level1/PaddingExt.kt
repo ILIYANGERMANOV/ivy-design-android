@@ -12,7 +12,7 @@ data class IvyPadding(
     val end: Dp?
 )
 
-fun Modifier.padding(ivyPadding: IvyPadding): Modifier {
+fun Modifier.ivyPadding(ivyPadding: IvyPadding): Modifier {
     return this.padding(
         top = ivyPadding.top ?: 0.dp,
         bottom = ivyPadding.bottom ?: 0.dp,

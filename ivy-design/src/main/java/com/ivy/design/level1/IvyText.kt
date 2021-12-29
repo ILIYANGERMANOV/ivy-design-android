@@ -16,7 +16,7 @@ fun IvyText(
     Text(
         modifier = Modifier
             .thenIf(padding != null) {
-                padding(ivyPadding = padding!!)
+                ivyPadding(ivyPadding = padding!!)
             }
             .then(modifier),
         text = text,

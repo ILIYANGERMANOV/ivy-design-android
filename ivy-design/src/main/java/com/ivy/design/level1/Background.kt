@@ -58,14 +58,14 @@ fun Modifier.background(background: Background): Modifier {
                 background(
                     brush = background.color,
                     shape = background.shape
-                ).padding(background.padding)
+                ).ivyPadding(background.padding)
             }
             is Background.Outlined -> {
                 border(
                     brush = background.color,
                     width = background.width,
                     shape = background.shape
-                ).padding(background.padding)
+                ).ivyPadding(background.padding)
             }
             is Background.None -> null
         }

@@ -66,6 +66,12 @@ class MainActivity : ComponentActivity() {
                 typo = UI.typo.b1
             )
 
+            SpacerV(height = 16.dp)
+
+            HorizontalDivider()
+
+            SpacerV(height = 16.dp)
+
             InputField(
                 modifier = Modifier
                     .fillMaxWidth()
