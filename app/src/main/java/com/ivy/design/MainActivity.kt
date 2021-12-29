@@ -70,7 +70,7 @@ class MainActivity : ComponentActivity() {
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
                 initialText = input,
-                hint = "Enter text"
+                hint = "Enter text",
             ) {
                 input = it
             }

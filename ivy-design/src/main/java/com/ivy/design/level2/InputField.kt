@@ -2,27 +2,41 @@ package com.ivy.design.level2
 
 import android.content.res.ColorStateList
 import android.text.InputType
+import android.util.TypedValue
 import android.widget.EditText
-import androidx.annotation.ColorInt
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.widget.addTextChangedListener
 import com.ivy.design.UI
 import com.ivy.design.level0.Transparent
+import com.ivy.design.level0.style
 import com.ivy.design.utils.IvyComponentPreview
 
+/**
+ * Limitations:
+ * - font cannot be set
+ */
 @Composable
 fun InputField(
     modifier: Modifier = Modifier,
     initialText: String = "",
     hint: String = "",
+    textStyle: TextStyle = UI.typo.b1.style(
+        color = UI.colors.pureInverse,
+        textAlign = TextAlign.Start
+    ),
+    hintStyle: TextStyle = UI.typo.b1.style(
+        color = Color.Gray,
+        textAlign = TextAlign.Start
+    ),
     onTextChanged: (String) -> Unit
 ) {
-    val textColor = UI.colors.pureInverse.toArgb()
-
     AndroidView(
         modifier = modifier,
         factory = {
@@ -34,7 +48,8 @@ fun InputField(
                 setHint(hint)
 
                 dynamicStyle(
-                    textColor = textColor
+                    textStyle = textStyle,
+                    hintStyle = hintStyle
                 )
 
                 addTextChangedListener { editable ->
@@ -46,17 +61,30 @@ fun InputField(
         },
         update = {
             it.dynamicStyle(
-                textColor = textColor
+                textStyle = textStyle,
+                hintStyle = hintStyle
             )
         }
     )
 }
 
 private fun EditText.dynamicStyle(
-    @ColorInt textColor: Int,
+    textStyle: TextStyle,
+    hintStyle: TextStyle
 ) {
-    setTextColor(textColor)
-    setHintTextColor(textColor)
+    setTextSize(TypedValue.COMPLEX_UNIT_SP, textStyle.fontSize.value)
+    setTextColor(textStyle.color.toArgb())
+    textAlignment = when (textStyle.textAlign) {
+        TextAlign.Start -> EditText.TEXT_ALIGNMENT_VIEW_START
+        TextAlign.Center -> EditText.TEXT_ALIGNMENT_CENTER
+        TextAlign.End -> EditText.TEXT_ALIGNMENT_VIEW_END
+        else -> EditText.TEXT_ALIGNMENT_VIEW_START
+    }
+
+
+    //hint text size cannot be set to EditText
+    setHintTextColor(hintStyle.color.toArgb())
+    //hint text alignment cannot be set to EditText
 }
 
 @Preview
