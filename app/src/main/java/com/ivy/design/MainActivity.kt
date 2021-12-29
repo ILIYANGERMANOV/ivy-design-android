@@ -16,6 +16,7 @@ import com.ivy.design.level0.colorAs
 import com.ivy.design.level1.*
 import com.ivy.design.level2.Button
 import com.ivy.design.level2.InputField
+import com.ivy.design.level2.IvyInputType
 import com.ivy.design.utils.IvyPreview
 
 class MainActivity : ComponentActivity() {
@@ -70,6 +71,7 @@ class MainActivity : ComponentActivity() {
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
                 initialText = input,
+                inputType = IvyInputType.LONG_TEXT,
                 hint = "Enter text",
             ) {
                 input = it

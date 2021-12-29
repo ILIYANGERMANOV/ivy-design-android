@@ -3,6 +3,7 @@ package com.ivy.design.level2
 import android.content.res.ColorStateList
 import android.text.InputType
 import android.util.TypedValue
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -35,13 +36,13 @@ fun InputField(
         color = Color.Gray,
         textAlign = TextAlign.Start
     ),
+    inputType: IvyInputType = IvyInputType.SHORT_TEXT,
     onTextChanged: (String) -> Unit
 ) {
     AndroidView(
         modifier = modifier,
         factory = {
             EditText(it).apply {
-                inputType = InputType.TYPE_CLASS_TEXT
                 setText(initialText)
                 backgroundTintList = ColorStateList.valueOf(Transparent.toArgb())
                 setPadding(0, 0, 0, 0)
@@ -49,7 +50,8 @@ fun InputField(
 
                 dynamicStyle(
                     textStyle = textStyle,
-                    hintStyle = hintStyle
+                    hintStyle = hintStyle,
+                    inputType = inputType
                 )
 
                 addTextChangedListener { editable ->
@@ -62,7 +64,8 @@ fun InputField(
         update = {
             it.dynamicStyle(
                 textStyle = textStyle,
-                hintStyle = hintStyle
+                hintStyle = hintStyle,
+                inputType = inputType
             )
         }
     )
@@ -70,7 +73,8 @@ fun InputField(
 
 private fun EditText.dynamicStyle(
     textStyle: TextStyle,
-    hintStyle: TextStyle
+    hintStyle: TextStyle,
+    inputType: IvyInputType
 ) {
     setTextSize(TypedValue.COMPLEX_UNIT_SP, textStyle.fontSize.value)
     setTextColor(textStyle.color.toArgb())
@@ -85,6 +89,66 @@ private fun EditText.dynamicStyle(
     //hint text size cannot be set to EditText
     setHintTextColor(hintStyle.color.toArgb())
     //hint text alignment cannot be set to EditText
+
+    this.inputType = when (inputType) {
+        IvyInputType.SHORT_TEXT -> {
+            InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
+        }
+        IvyInputType.LONG_TEXT -> {
+            InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
+        }
+        IvyInputType.NAMES -> {
+            InputType.TYPE_TEXT_VARIATION_PERSON_NAME or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
+        }
+        IvyInputType.EMAIL -> {
+            InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
+        }
+        IvyInputType.PHONE -> {
+            InputType.TYPE_CLASS_PHONE or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
+        }
+        IvyInputType.NUMBER -> {
+            InputType.TYPE_CLASS_NUMBER
+        }
+        IvyInputType.PASSWORD -> {
+            InputType.TYPE_TEXT_VARIATION_PASSWORD
+        }
+        IvyInputType.PASSWORD_NUMBER -> {
+            InputType.TYPE_NUMBER_VARIATION_PASSWORD
+        }
+        IvyInputType.PASSWORD_VISIBLE -> {
+            InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+        }
+        IvyInputType.PASSWORD_NUMBER_VISIBLE -> {
+            InputType.TYPE_CLASS_NUMBER
+        }
+    }
+    when (inputType) {
+        IvyInputType.LONG_TEXT -> {
+            isSingleLine = false
+            imeOptions = EditorInfo.IME_FLAG_NO_ENTER_ACTION;
+        }
+        else -> {
+            //do nothing
+        }
+    }
+}
+
+enum class IvyInputType {
+    SHORT_TEXT,
+    LONG_TEXT,
+    NAMES,
+    EMAIL,
+    PHONE,
+    NUMBER,
+    PASSWORD,
+    PASSWORD_NUMBER,
+    PASSWORD_VISIBLE,
+    PASSWORD_NUMBER_VISIBLE
+}
+
+enum class IvyIMEAction {
+    DONE,
+    NEXT
 }
 
 @Preview
