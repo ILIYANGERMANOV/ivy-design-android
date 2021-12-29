@@ -13,11 +13,15 @@ import com.ivy.design.api.IvyUI
 import com.ivy.design.api.ivyContext
 import com.ivy.design.api.systems.IvyWalletDesign
 import com.ivy.design.level0.colorAs
-import com.ivy.design.level1.*
+import com.ivy.design.level1.ColumnRoot
+import com.ivy.design.level1.HorizontalDivider
+import com.ivy.design.level1.IvyText
+import com.ivy.design.level1.SpacerV
 import com.ivy.design.level2.Button
 import com.ivy.design.level2.InputField
 import com.ivy.design.level2.IvyInputType
 import com.ivy.design.utils.IvyPreview
+import com.ivy.design.utils.padding
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

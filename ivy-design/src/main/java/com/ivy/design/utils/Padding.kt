@@ -1,16 +1,10 @@
-package com.ivy.design.level1
+package com.ivy.design.utils
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-
-data class IvyPadding(
-    val top: Dp?,
-    val bottom: Dp?,
-    val start: Dp?,
-    val end: Dp?
-)
+import com.ivy.design.data.IvyPadding
 
 fun Modifier.ivyPadding(ivyPadding: IvyPadding): Modifier {
     return this.padding(

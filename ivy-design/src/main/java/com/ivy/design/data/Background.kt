@@ -1,4 +1,4 @@
-package com.ivy.design.level1
+package com.ivy.design.data
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ivy.design.level0.asBrush
+import com.ivy.design.utils.ivyPadding
 import com.ivy.design.utils.thenWhen
 
 sealed class Background {
