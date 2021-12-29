@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -55,14 +55,27 @@ class MainActivity : ComponentActivity() {
 
             SpacerV(32.dp)
 
+            var input by remember {
+                mutableStateOf("")
+            }
+
+            IvyText(
+                padding = padding(start = 16.dp),
+                text = "Input: $input",
+                typo = UI.typo.b1
+            )
+
             InputField(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
-                initialText = "Test"
-            )
+                initialText = input,
+                hint = "Enter text"
+            ) {
+                input = it
+            }
 
-            SpacerV(24.dp)
+            SpacerV(8.dp)
 
             val ivyContext = ivyContext()
             Button(
