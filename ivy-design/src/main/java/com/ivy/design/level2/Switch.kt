@@ -16,6 +16,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ivy.design.UI
+import com.ivy.design.level1.SpacerH
+import com.ivy.design.level1.SpacerWeight
 import com.ivy.design.utils.IvyComponentPreview
 import com.ivy.design.utils.springBounce
 
@@ -50,10 +52,10 @@ fun Switch(
             animationSpec = animationMove
         )
 
-        Spacer(Modifier.width(4.dp))
+        SpacerH(width = 4.dp)
 
         if (weightStart > 0) {
-            Spacer(Modifier.weight(weightStart))
+            SpacerWeight(weight = weightStart)
         }
 
         //Circle
@@ -65,10 +67,10 @@ fun Switch(
 
         val weightEnd = 1f - weightStart
         if (weightEnd > 0) {
-            Spacer(Modifier.weight(weightEnd))
+            SpacerWeight(weight = weightEnd)
         }
 
-        Spacer(Modifier.width(4.dp))
+        SpacerH(width = 4.dp)
     }
 }
 
