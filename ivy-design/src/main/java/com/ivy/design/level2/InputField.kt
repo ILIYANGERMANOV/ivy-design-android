@@ -19,6 +19,10 @@ import com.ivy.design.level0.Transparent
 import com.ivy.design.level0.style
 import com.ivy.design.utils.IvyComponentPreview
 
+
+//TODO: IMEAction support
+//TODO: Set cursor color
+//TODO: Set color of cursor handle, selection, etc
 /**
  * Limitations:
  * - font cannot be set
