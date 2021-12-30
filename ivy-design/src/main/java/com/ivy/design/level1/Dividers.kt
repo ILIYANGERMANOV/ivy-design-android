@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
@@ -15,7 +14,7 @@ import com.ivy.design.utils.IvyComponentPreview
 import com.ivy.design.utils.thenWhen
 
 @Composable
-fun HorizontalDivider(
+fun DividerH(
     size: DividerSize = DividerSize.FillMax(
         padding = 16.dp
     ),
@@ -36,14 +35,13 @@ fun HorizontalDivider(
                     }
                 }
             }
-            .clip(shape)
             .height(width)
-            .background(color)
+            .background(color, shape)
     )
 }
 
 @Composable
-fun VerticalDivider(
+fun DividerV(
     size: DividerSize = DividerSize.FillMax(
         padding = 16.dp
     ),
@@ -64,9 +62,20 @@ fun VerticalDivider(
                     }
                 }
             }
-            .clip(shape)
             .width(width)
-            .background(color)
+            .background(color, shape)
+    )
+}
+
+@Composable
+fun Divider(
+    modifier: Modifier = Modifier,
+    color: Color = UI.colors.gray,
+    shape: Shape = UI.shapes.rFull
+) {
+    Spacer(
+        modifier = modifier
+            .background(color, shape)
     )
 }
 
@@ -80,7 +89,7 @@ sealed class DividerSize {
 @Composable
 private fun PreviewHorizontalDivider_fillMax() {
     IvyComponentPreview {
-        HorizontalDivider(
+        DividerH(
             size = DividerSize.FillMax(
                 padding = 16.dp
             )
@@ -92,7 +101,7 @@ private fun PreviewHorizontalDivider_fillMax() {
 @Composable
 private fun PreviewHorizontalDivider_fixed() {
     IvyComponentPreview {
-        HorizontalDivider(
+        DividerH(
             size = DividerSize.Fixed(
                 size = 32.dp
             )
@@ -104,7 +113,7 @@ private fun PreviewHorizontalDivider_fixed() {
 @Composable
 private fun PreviewVerticalDivider_fillMax() {
     IvyComponentPreview {
-        VerticalDivider(
+        DividerV(
             size = DividerSize.FillMax(
                 padding = 16.dp
             )
@@ -116,10 +125,44 @@ private fun PreviewVerticalDivider_fillMax() {
 @Composable
 private fun PreviewVerticalDivider_fixed() {
     IvyComponentPreview {
-        VerticalDivider(
+        DividerV(
             size = DividerSize.Fixed(
                 size = 16.dp
             )
         )
+    }
+}
+
+@Preview
+@Composable
+private fun PreviewDivider() {
+    IvyComponentPreview {
+        Row {
+            SpacerH(16.dp)
+
+            Divider(
+                modifier = Modifier
+                    .weight(1f)
+                    .height(2.dp)
+            )
+
+            SpacerH(16.dp)
+
+            Divider(
+                modifier = Modifier
+                    .weight(1f)
+                    .height(2.dp)
+            )
+
+            SpacerH(16.dp)
+
+            Divider(
+                modifier = Modifier
+                    .weight(1f)
+                    .height(2.dp)
+            )
+
+            SpacerH(16.dp)
+        }
     }
 }

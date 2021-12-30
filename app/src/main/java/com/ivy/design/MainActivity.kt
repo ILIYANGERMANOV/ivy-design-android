@@ -15,7 +15,7 @@ import com.ivy.design.api.ivyContext
 import com.ivy.design.api.systems.IvyWalletDesign
 import com.ivy.design.level0.colorAs
 import com.ivy.design.level1.ColumnRoot
-import com.ivy.design.level1.HorizontalDivider
+import com.ivy.design.level1.DividerH
 import com.ivy.design.level1.IvyText
 import com.ivy.design.level1.SpacerV
 import com.ivy.design.level2.Button
@@ -74,7 +74,7 @@ class MainActivity : ComponentActivity() {
 
             SpacerV(height = 16.dp)
 
-            HorizontalDivider()
+            DividerH()
 
             SpacerV(height = 16.dp)
 
@@ -91,7 +91,7 @@ class MainActivity : ComponentActivity() {
 
             SpacerV(32.dp)
 
-            HorizontalDivider()
+            DividerH()
 
             InputField(
                 modifier = Modifier
