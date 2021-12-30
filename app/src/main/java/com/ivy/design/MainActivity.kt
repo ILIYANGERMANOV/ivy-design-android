@@ -87,7 +87,7 @@ class MainActivity : ComponentActivity() {
                 input = it
             }
 
-            SpacerV(8.dp)
+            SpacerV(24.dp)
 
             val ivyContext = ivyContext()
             Button(

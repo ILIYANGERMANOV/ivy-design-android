@@ -1,6 +1,9 @@
 package com.ivy.design.level2
 
+import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.text.InputType
 import android.util.TypedValue
 import android.view.inputmethod.EditorInfo
@@ -15,17 +18,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.widget.addTextChangedListener
 import com.ivy.design.UI
+import com.ivy.design.level0.Purple1Dark
+import com.ivy.design.level0.Purple1Light
 import com.ivy.design.level0.Transparent
 import com.ivy.design.level0.style
 import com.ivy.design.utils.IvyComponentPreview
+import com.ivy.design.utils.dpToPx
+import kotlin.math.roundToInt
 
 
 //TODO: IMEAction support
-//TODO: Set cursor color
-//TODO: Set color of cursor handle, selection, etc
+//TODO: Support setting focus
 /**
  * Limitations:
  * - font cannot be set
+ * - handles color must be set Theme XML `accentColor`
  */
 @Composable
 fun InputField(
@@ -41,8 +48,12 @@ fun InputField(
         textAlign = TextAlign.Start
     ),
     inputType: IvyInputType = IvyInputType.SHORT_TEXT,
+    imeAction: IvyIMEAction = IvyIMEAction.DONE,
+    cursorColor: Color = UI.colors.pureInverse,
+    highlightColor: Color = if (UI.colors.isLight) Purple1Light else Purple1Dark,
     onTextChanged: (String) -> Unit
 ) {
+
     AndroidView(
         modifier = modifier,
         factory = {
@@ -53,6 +64,8 @@ fun InputField(
                 setHint(hint)
 
                 dynamicStyle(
+                    cursorColor = cursorColor,
+                    highlightColor = highlightColor,
                     textStyle = textStyle,
                     hintStyle = hintStyle,
                     inputType = inputType
@@ -67,6 +80,8 @@ fun InputField(
         },
         update = {
             it.dynamicStyle(
+                cursorColor = cursorColor,
+                highlightColor = highlightColor,
                 textStyle = textStyle,
                 hintStyle = hintStyle,
                 inputType = inputType
@@ -76,10 +91,15 @@ fun InputField(
 }
 
 private fun EditText.dynamicStyle(
+    highlightColor: Color,
+    cursorColor: Color,
     textStyle: TextStyle,
     hintStyle: TextStyle,
     inputType: IvyInputType
 ) {
+    this.highlightColor = highlightColor.toArgb()
+    setCursorColor(cursorColor)
+
     setTextSize(TypedValue.COMPLEX_UNIT_SP, textStyle.fontSize.value)
     setTextColor(textStyle.color.toArgb())
     textAlignment = when (textStyle.textAlign) {
@@ -126,6 +146,7 @@ private fun EditText.dynamicStyle(
             InputType.TYPE_CLASS_NUMBER
         }
     }
+
     when (inputType) {
         IvyInputType.LONG_TEXT -> {
             isSingleLine = false
@@ -153,6 +174,30 @@ enum class IvyInputType {
 enum class IvyIMEAction {
     DONE,
     NEXT
+}
+
+fun EditText.setCursorColor(color: Color) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        textCursorDrawable = cursorDrawable(
+            context = context,
+            widthDp = 2.5f,
+            color = color
+        )
+        invalidate()
+    }
+}
+
+private fun cursorDrawable(
+    context: Context,
+    widthDp: Float = 3f,
+    color: Color
+): GradientDrawable {
+    return GradientDrawable().apply {
+//            <size android:width="3dp" />
+//            <solid android:color="#FFFFFF"  />
+        setSize(widthDp.dpToPx(context).roundToInt(), 16.dpToPx(context))
+        setColor(color.toArgb())
+    }
 }
 
 @Preview
