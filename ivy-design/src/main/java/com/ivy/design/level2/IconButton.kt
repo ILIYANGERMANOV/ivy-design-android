@@ -10,11 +10,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ivy.design.R
 import com.ivy.design.UI
-import com.ivy.design.data.Background
-import com.ivy.design.data.background
-import com.ivy.design.data.clipBackground
 import com.ivy.design.level0.White
 import com.ivy.design.level1.IvyIcon
+import com.ivy.design.level1.data.Background
+import com.ivy.design.level1.data.background
+import com.ivy.design.level1.data.clipBackground
 import com.ivy.design.utils.IvyComponentPreview
 import com.ivy.design.utils.padding
 
