@@ -24,6 +24,7 @@ import com.ivy.design.level0.Transparent
 import com.ivy.design.level0.style
 import com.ivy.design.utils.IvyComponentPreview
 import com.ivy.design.utils.dpToPx
+import com.ivy.design.utils.hideKeyboard
 import kotlin.math.roundToInt
 
 
@@ -48,7 +49,8 @@ fun InputField(
         textAlign = TextAlign.Start
     ),
     inputType: IvyInputType = IvyInputType.SHORT_TEXT,
-    imeAction: IvyIMEAction = IvyIMEAction.DONE,
+    imeAction: IvyImeAction = IvyImeAction.DONE,
+    onImeActionListener: ((EditText) -> Unit)? = null,
     cursorColor: Color = UI.colors.pureInverse,
     highlightColor: Color = if (UI.colors.isLight) Purple1Light else Purple1Dark,
     onTextChanged: (String) -> Unit
@@ -66,9 +68,13 @@ fun InputField(
                 dynamicStyle(
                     cursorColor = cursorColor,
                     highlightColor = highlightColor,
+
                     textStyle = textStyle,
                     hintStyle = hintStyle,
-                    inputType = inputType
+
+                    inputType = inputType,
+                    imeAction = imeAction,
+                    onImeActionListener = onImeActionListener
                 )
 
                 addTextChangedListener { editable ->
@@ -82,9 +88,13 @@ fun InputField(
             it.dynamicStyle(
                 cursorColor = cursorColor,
                 highlightColor = highlightColor,
+
                 textStyle = textStyle,
                 hintStyle = hintStyle,
-                inputType = inputType
+
+                inputType = inputType,
+                imeAction = imeAction,
+                onImeActionListener = onImeActionListener
             )
         }
     )
@@ -93,9 +103,13 @@ fun InputField(
 private fun EditText.dynamicStyle(
     highlightColor: Color,
     cursorColor: Color,
+
     textStyle: TextStyle,
     hintStyle: TextStyle,
-    inputType: IvyInputType
+
+    inputType: IvyInputType,
+    imeAction: IvyImeAction,
+    onImeActionListener: ((EditText) -> Unit)?
 ) {
     this.highlightColor = highlightColor.toArgb()
     setCursorColor(cursorColor)
@@ -146,7 +160,21 @@ private fun EditText.dynamicStyle(
             InputType.TYPE_CLASS_NUMBER
         }
     }
-
+    imeOptions = when (imeAction) {
+        IvyImeAction.DONE -> EditorInfo.IME_ACTION_DONE
+        IvyImeAction.NEXT -> EditorInfo.IME_ACTION_NEXT
+    }
+    if (inputType != IvyInputType.LONG_TEXT) {
+        //Make sure we don't break the default new line action
+        setOnEditorActionListener { _, _, _ ->
+            if (onImeActionListener != null) {
+                onImeActionListener(this)
+            } else {
+                hideKeyboard(this)
+            }
+            true
+        }
+    }
     when (inputType) {
         IvyInputType.LONG_TEXT -> {
             isSingleLine = false
@@ -171,7 +199,7 @@ enum class IvyInputType {
     PASSWORD_NUMBER_VISIBLE
 }
 
-enum class IvyIMEAction {
+enum class IvyImeAction {
     DONE,
     NEXT
 }
@@ -183,7 +211,7 @@ fun EditText.setCursorColor(color: Color) {
             widthDp = 2.5f,
             color = color
         )
-        invalidate()
+        //TODO: Fix bug where cursor color isn't updated after theme switch
     }
 }
 
