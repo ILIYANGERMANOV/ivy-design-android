@@ -9,7 +9,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.ivy.design.api.IvyUI
 import com.ivy.design.api.NavigationRoot
 import com.ivy.design.navigation.Navigation
-import com.ivy.design.navigation.Screen
 import com.ivy.design.screen.Home
 import com.ivy.design.screen.HomeScreen
 import com.ivy.design.screen.SampleA
@@ -24,11 +23,7 @@ class MainActivity : ComponentActivity() {
             IvyUI(
                 design = sampleDesignSystem()
             ) {
-                NavigationRoot(
-                    navigation = navigation
-                ) { screen ->
-                    UI(screen = screen)
-                }
+                UI()
             }
         }
 
@@ -36,12 +31,16 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun BoxWithConstraintsScope.UI(screen: Screen?) {
-        when (screen) {
-            is Home -> HomeScreen(screen = screen)
-            is SampleA -> SampleAScreen(screen = screen)
-            else -> {
-                //do nothing or show loading
+    private fun BoxWithConstraintsScope.UI() {
+        NavigationRoot(
+            navigation = navigation
+        ) { screen ->
+            when (screen) {
+                is Home -> HomeScreen(screen = screen)
+                is SampleA -> SampleAScreen(screen = screen)
+                else -> {
+                    //do nothing or show loading
+                }
             }
         }
     }
@@ -51,10 +50,10 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun DefaultPreview() {
         SampleAppPreview {
-            UI(
-                screen = Home("Hi, Ivy Design Preview!")
-            )
+            UI()
         }
+
+        navigation.navigateTo(Home("Hi, Ivy Design Preview!"))
     }
 
     override fun onBackPressed() {
