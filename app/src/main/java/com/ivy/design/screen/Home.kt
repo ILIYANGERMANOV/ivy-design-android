@@ -8,12 +8,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ivy.design.SampleAppPreview
 import com.ivy.design.api.navigation
-import com.ivy.design.l0_system.UI
-import com.ivy.design.l0_system.colorAs
 import com.ivy.design.l1_buildingBlocks.ColumnRoot
-import com.ivy.design.l1_buildingBlocks.IvyText
 import com.ivy.design.l1_buildingBlocks.SpacerV
 import com.ivy.design.l2_components.Button
+import com.ivy.design.l3_ivyComponents.ScreenTitleLarge
 import com.ivy.design.navigation.Screen
 
 data class Home(
@@ -36,10 +34,7 @@ private fun UI(
     ) {
         SpacerV(height = 24.dp)
 
-        IvyText(
-            text = title,
-            typo = UI.typo.h1.colorAs(UI.colors.primary)
-        )
+        ScreenTitleLarge(text = title)
 
         SpacerV(height = 32.dp)
 
@@ -56,6 +51,6 @@ private fun UI(
 @Composable
 private fun Preview() {
     SampleAppPreview {
-        UI(title = "Sample A")
+        UI(title = "Home")
     }
 }

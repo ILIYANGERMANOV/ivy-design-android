@@ -8,22 +8,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.ivy.design.api.IvyUI
 import com.ivy.design.api.NavigationRoot
-import com.ivy.design.navigation.Navigation
+import com.ivy.design.navigation.Screen
 import com.ivy.design.screen.Home
 import com.ivy.design.screen.HomeScreen
 import com.ivy.design.screen.SampleA
 import com.ivy.design.screen.SampleAScreen
 
 class MainActivity : ComponentActivity() {
-    private val navigation = Navigation()
+    private val navigation = sampleAppNavigation()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             IvyUI(
-                design = sampleDesignSystem()
+                design = sampleAppDesignSystem()
             ) {
-                UI()
+                NavigationRoot(
+                    navigation = navigation
+                ) { screen ->
+                    UI(screen = screen)
+                }
             }
         }
 
@@ -31,16 +35,12 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun BoxWithConstraintsScope.UI() {
-        NavigationRoot(
-            navigation = navigation
-        ) { screen ->
-            when (screen) {
-                is Home -> HomeScreen(screen = screen)
-                is SampleA -> SampleAScreen(screen = screen)
-                else -> {
-                    //do nothing or show loading
-                }
+    private fun BoxWithConstraintsScope.UI(screen: Screen?) {
+        when (screen) {
+            is Home -> HomeScreen(screen = screen)
+            is SampleA -> SampleAScreen(screen = screen)
+            else -> {
+                //do nothing or show loading
             }
         }
     }
@@ -50,10 +50,10 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun DefaultPreview() {
         SampleAppPreview {
-            UI()
+            UI(
+                screen = Home("Hi, Ivy Design Preview!")
+            )
         }
-
-        navigation.navigateTo(Home("Hi, Ivy Design Preview!"))
     }
 
     override fun onBackPressed() {

@@ -47,7 +47,7 @@ abstract class IvyWalletDesign : IvyDesign {
             )
             override val h2 = TextStyle(
                 fontFamily = raleWay,
-                fontWeight = FontWeight.Normal,
+                fontWeight = FontWeight.ExtraBold,
                 fontSize = h2
             )
             override val b1 = TextStyle(
@@ -73,7 +73,7 @@ abstract class IvyWalletDesign : IvyDesign {
             )
             override val nH2 = TextStyle(
                 fontFamily = openSans,
-                fontWeight = FontWeight.Normal,
+                fontWeight = FontWeight.Bold,
                 fontSize = h2
             )
             override val nB1 = TextStyle(
