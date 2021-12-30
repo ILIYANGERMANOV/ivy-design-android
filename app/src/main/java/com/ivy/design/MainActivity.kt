@@ -3,144 +3,63 @@ package com.ivy.design
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.BoxWithConstraintsScope
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.ivy.design.api.IvyUI
-import com.ivy.design.api.ivyContext
-import com.ivy.design.api.systems.IvyWalletDesign
-import com.ivy.design.l0_system.colorAs
-import com.ivy.design.l1_buildingBlocks.*
-import com.ivy.design.l2_components.*
-import com.ivy.design.utils.IvyPreview
-import com.ivy.design.utils.onEvent
-import com.ivy.design.utils.padding
+import com.ivy.design.api.NavigationRoot
+import com.ivy.design.navigation.Navigation
+import com.ivy.design.navigation.Screen
+import com.ivy.design.screen.Home
+import com.ivy.design.screen.HomeScreen
+import com.ivy.design.screen.SampleA
+import com.ivy.design.screen.SampleAScreen
 
 class MainActivity : ComponentActivity() {
+    private val navigation = Navigation()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             IvyUI(
-                design = design()
+                design = sampleDesignSystem()
             ) {
-                UI()
+                NavigationRoot(
+                    navigation = navigation
+                ) { screen ->
+                    UI(screen = screen)
+                }
             }
         }
-    }
 
-    private fun design() = object : IvyWalletDesign() {
-        override fun context() = SampleContext()
+        navigation.navigateTo(Home("Hi, Ivy Design!"))
     }
 
     @Composable
-    private fun UI() {
-        ColumnRoot(
-            modifier = Modifier.verticalScroll(rememberScrollState())
-        ) {
-            SpacerV(24.dp)
-
-//            SpacerKeyboardHeight(
-//                animation = springBounceVerySlow()
-//            )
-
-            IvyText(
-                text = "Hello, Ivy Design!",
-                typo = UI.typo.h1.colorAs(UI.colors.primary),
-                padding = padding(horizontal = 16.dp)
-            )
-
-            SpacerV(12.dp)
-
-            IvyText(
-                text = "It's just the beginning...",
-                typo = UI.typo.b1,
-                padding = padding(horizontal = 16.dp)
-            )
-
-            SpacerV(32.dp)
-
-            var input by remember {
-                mutableStateOf("")
+    private fun BoxWithConstraintsScope.UI(screen: Screen?) {
+        when (screen) {
+            is Home -> HomeScreen(screen = screen)
+            is SampleA -> SampleAScreen(screen = screen)
+            else -> {
+                //do nothing or show loading
             }
-
-            IvyText(
-                padding = padding(start = 16.dp),
-                text = "Input:\n$input",
-                typo = UI.typo.b1
-            )
-
-            SpacerV(height = 16.dp)
-
-            DividerH()
-
-            val longTextFocus = InputFieldFocus()
-            val shortTextFocus = InputFieldFocus()
-
-            InputField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                focus = longTextFocus,
-                initialText = input,
-                inputType = IvyInputType.LONG_TEXT,
-                hint = "Input long text",
-            ) {
-                input = it
-            }
-
-            SpacerV(32.dp)
-
-            DividerH()
-
-            InputField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                focus = shortTextFocus,
-                inputType = IvyInputType.SHORT_TEXT,
-                hint = "Input short text",
-                imeAction = IvyImeAction.NEXT,
-                onImeActionListener = {
-                    longTextFocus.requestFocus()
-                }
-            ) {
-                //do nothing
-            }
-
-            onEvent {
-                shortTextFocus.requestFocus()
-            }
-
-            SpacerV(24.dp)
-
-            val ivyContext = ivyContext()
-            Button(
-                modifier = Modifier.padding(start = 16.dp),
-                text = "Switch theme",
-            ) {
-                ivyContext.switchTheme(ivyContext.theme.inverted())
-            }
-
-            SpacerWeight(weight = 1f)
-            SpacerKeyboardHeight()
-            SpacerV(height = 48.dp) //extra scroll of 48.dp
         }
     }
+
 
     @Preview
     @Composable
     fun DefaultPreview() {
-        IvyPreview(
-            design = design()
-        ) {
+        SampleAppPreview {
             UI(
-
+                screen = Home("Hi, Ivy Design Preview!")
             )
+        }
+    }
+
+    override fun onBackPressed() {
+        if (!navigation.onBackPressed()) {
+            super.onBackPressed()
         }
     }
 }

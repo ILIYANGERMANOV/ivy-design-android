@@ -3,11 +3,9 @@ package com.ivy.design
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.ivy.design.l0_system.Theme
 
 abstract class IvyContext {
-//    var currentScreen: Screen? by mutableStateOf(null)
-//        private set
-
     var theme: Theme by mutableStateOf(Theme.LIGHT)
         private set
 

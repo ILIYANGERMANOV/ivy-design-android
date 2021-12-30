@@ -21,11 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.widget.addTextChangedListener
-import com.ivy.design.UI
-import com.ivy.design.l0_system.Purple1Dark
-import com.ivy.design.l0_system.Purple1Light
-import com.ivy.design.l0_system.Transparent
-import com.ivy.design.l0_system.style
+import com.ivy.design.l0_system.*
 import com.ivy.design.utils.*
 import kotlin.math.roundToInt
 

@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.ivy.design.IvyContext
-import com.ivy.design.IvyTheme
+import com.ivy.design.l0_system.IvyTheme
 
 val LocalIvyContext = compositionLocalOf<IvyContext> { error("No LocalIvyContext") }
 

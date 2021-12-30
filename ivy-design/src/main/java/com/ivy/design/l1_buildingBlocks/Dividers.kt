@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.ivy.design.UI
+import com.ivy.design.l0_system.UI
 import com.ivy.design.utils.IvyComponentPreview
 import com.ivy.design.utils.thenWhen
 

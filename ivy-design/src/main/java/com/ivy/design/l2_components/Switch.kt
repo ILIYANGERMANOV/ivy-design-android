@@ -15,7 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.ivy.design.UI
+import com.ivy.design.l0_system.UI
 import com.ivy.design.l1_buildingBlocks.SpacerH
 import com.ivy.design.l1_buildingBlocks.SpacerWeight
 import com.ivy.design.utils.IvyComponentPreview

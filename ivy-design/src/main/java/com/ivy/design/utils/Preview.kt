@@ -9,11 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.ivy.design.IvyContext
-import com.ivy.design.Theme
-import com.ivy.design.UI
 import com.ivy.design.api.IvyDesign
 import com.ivy.design.api.IvyUI
 import com.ivy.design.api.systems.IvyWalletDesign
+import com.ivy.design.l0_system.Theme
+import com.ivy.design.l0_system.UI
 
 
 @Composable
@@ -39,14 +39,14 @@ fun IvyComponentPreview(
 
 @Composable
 fun IvyPreview(
-    design: IvyDesign,
     theme: Theme = Theme.LIGHT,
-    content: @Composable BoxWithConstraintsScope.() -> Unit
+    design: IvyDesign,
+    Content: @Composable BoxWithConstraintsScope.() -> Unit
 ) {
     design.context().switchTheme(theme = theme)
     IvyUI(
         design = design,
-        Content = content
+        Content = Content
     )
 }
 
