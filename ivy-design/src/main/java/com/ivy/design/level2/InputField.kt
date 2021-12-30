@@ -5,10 +5,14 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.text.InputType
+import android.util.Log
 import android.util.TypedValue
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -22,13 +26,10 @@ import com.ivy.design.level0.Purple1Dark
 import com.ivy.design.level0.Purple1Light
 import com.ivy.design.level0.Transparent
 import com.ivy.design.level0.style
-import com.ivy.design.utils.IvyComponentPreview
-import com.ivy.design.utils.dpToPx
-import com.ivy.design.utils.hideKeyboard
+import com.ivy.design.utils.*
 import kotlin.math.roundToInt
 
 
-//TODO: IMEAction support
 //TODO: Support setting focus
 /**
  * Limitations:
@@ -53,6 +54,7 @@ fun InputField(
     onImeActionListener: ((EditText) -> Unit)? = null,
     cursorColor: Color = UI.colors.pureInverse,
     highlightColor: Color = if (UI.colors.isLight) Purple1Light else Purple1Dark,
+    focus: InputFieldFocus? = null,
     onTextChanged: (String) -> Unit
 ) {
 
@@ -82,6 +84,8 @@ fun InputField(
                         onTextChanged(text)
                     }
                 }
+
+                selectTextEnd()
             }
         },
         update = {
@@ -96,6 +100,17 @@ fun InputField(
                 imeAction = imeAction,
                 onImeActionListener = onImeActionListener
             )
+
+            //Log focus.triggerRecomposition so recomposition can be triggered
+            Log.d("ivyInputField", "Triggering recomposition: ${focus?.triggerRecomposition}")
+            if (focus?.consumeFocus() == true) {
+                it.requestFocus()
+                it.selectTextEnd()
+                postDelayed(100) {
+                    //ensure that the EditText is initialized
+                    it.showKeyboard()
+                }
+            }
         }
     )
 }
@@ -111,6 +126,8 @@ private fun EditText.dynamicStyle(
     imeAction: IvyImeAction,
     onImeActionListener: ((EditText) -> Unit)?
 ) {
+    val originalSelection = this.selectionEnd
+
     this.highlightColor = highlightColor.toArgb()
     setCursorColor(cursorColor)
 
@@ -170,7 +187,7 @@ private fun EditText.dynamicStyle(
             if (onImeActionListener != null) {
                 onImeActionListener(this)
             } else {
-                hideKeyboard(this)
+                this.hideKeyboard()
             }
             true
         }
@@ -184,6 +201,13 @@ private fun EditText.dynamicStyle(
             //do nothing
         }
     }
+
+    //restore original selection
+    setSelection(originalSelection)
+}
+
+fun EditText.selectTextEnd() {
+    setSelection(text.length)
 }
 
 enum class IvyInputType {
@@ -202,6 +226,23 @@ enum class IvyInputType {
 enum class IvyImeAction {
     DONE,
     NEXT
+}
+
+class InputFieldFocus {
+    private var requestFocus = false
+    var triggerRecomposition: Int by mutableStateOf(0)
+        private set
+
+    fun consumeFocus(): Boolean {
+        val shouldFocus = requestFocus
+        requestFocus = false
+        return shouldFocus
+    }
+
+    fun requestFocus() {
+        this.requestFocus = true
+        triggerRecomposition++
+    }
 }
 
 fun EditText.setCursorColor(color: Color) {

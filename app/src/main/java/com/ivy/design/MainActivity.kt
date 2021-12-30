@@ -1,7 +1,6 @@
 package com.ivy.design
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,11 +17,9 @@ import com.ivy.design.level1.ColumnRoot
 import com.ivy.design.level1.DividerH
 import com.ivy.design.level1.IvyText
 import com.ivy.design.level1.SpacerV
-import com.ivy.design.level2.Button
-import com.ivy.design.level2.InputField
-import com.ivy.design.level2.IvyImeAction
-import com.ivy.design.level2.IvyInputType
+import com.ivy.design.level2.*
 import com.ivy.design.utils.IvyPreview
+import com.ivy.design.utils.onEvent
 import com.ivy.design.utils.padding
 
 class MainActivity : ComponentActivity() {
@@ -76,12 +73,14 @@ class MainActivity : ComponentActivity() {
 
             DividerH()
 
-            SpacerV(height = 16.dp)
+            val longTextFocus = InputFieldFocus()
+            val shortTextFocus = InputFieldFocus()
 
             InputField(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
+                focus = longTextFocus,
                 initialText = input,
                 inputType = IvyInputType.LONG_TEXT,
                 hint = "Input long text",
@@ -97,15 +96,19 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
+                focus = shortTextFocus,
                 inputType = IvyInputType.SHORT_TEXT,
                 hint = "Input short text",
                 imeAction = IvyImeAction.NEXT,
                 onImeActionListener = {
-                    Toast.makeText(applicationContext, "IME action", Toast.LENGTH_SHORT)
-                        .show()
+                    longTextFocus.requestFocus()
                 }
             ) {
+                //do nothing
+            }
 
+            onEvent {
+                shortTextFocus.requestFocus()
             }
 
             SpacerV(24.dp)
