@@ -1,4 +1,4 @@
-package com.ivy.design.level1.data
+package com.ivy.design.l1_buildingBlocks.data
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.ivy.design.level0.asBrush
+import com.ivy.design.l0_system.asBrush
 import com.ivy.design.utils.ivyPadding
 import com.ivy.design.utils.thenWhen
 

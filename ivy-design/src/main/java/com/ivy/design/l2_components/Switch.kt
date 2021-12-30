@@ -1,4 +1,4 @@
-package com.ivy.design.level2
+package com.ivy.design.l2_components
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.AnimationSpec
@@ -16,8 +16,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ivy.design.UI
-import com.ivy.design.level1.SpacerH
-import com.ivy.design.level1.SpacerWeight
+import com.ivy.design.l1_buildingBlocks.SpacerH
+import com.ivy.design.l1_buildingBlocks.SpacerWeight
 import com.ivy.design.utils.IvyComponentPreview
 import com.ivy.design.utils.springBounce
 

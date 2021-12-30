@@ -9,10 +9,10 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.compositionLocalOf
 import com.ivy.design.api.IvyDesign
-import com.ivy.design.level0.IvyColors
-import com.ivy.design.level0.IvyShapes
-import com.ivy.design.level0.IvyTypography
-import com.ivy.design.level0.White
+import com.ivy.design.l0_system.IvyColors
+import com.ivy.design.l0_system.IvyShapes
+import com.ivy.design.l0_system.IvyTypography
+import com.ivy.design.l0_system.White
 
 val LocalIvyColors = compositionLocalOf<IvyColors> { error("No IvyColors") }
 val LocalIvyTypography = compositionLocalOf<IvyTypography> { error("No IvyTypography") }

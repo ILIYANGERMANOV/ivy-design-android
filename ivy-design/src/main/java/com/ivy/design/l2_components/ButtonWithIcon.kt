@@ -1,4 +1,4 @@
-package com.ivy.design.level2
+package com.ivy.design.l2_components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.clickable
@@ -18,14 +18,14 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ivy.design.R
 import com.ivy.design.UI
-import com.ivy.design.level0.Transparent
-import com.ivy.design.level0.White
-import com.ivy.design.level0.style
-import com.ivy.design.level1.IvyIcon
-import com.ivy.design.level1.SpacerH
-import com.ivy.design.level1.data.Background
-import com.ivy.design.level1.data.background
-import com.ivy.design.level1.data.clipBackground
+import com.ivy.design.l0_system.Transparent
+import com.ivy.design.l0_system.White
+import com.ivy.design.l0_system.style
+import com.ivy.design.l1_buildingBlocks.IvyIcon
+import com.ivy.design.l1_buildingBlocks.SpacerH
+import com.ivy.design.l1_buildingBlocks.data.Background
+import com.ivy.design.l1_buildingBlocks.data.background
+import com.ivy.design.l1_buildingBlocks.data.clipBackground
 import com.ivy.design.utils.IvyComponentPreview
 import com.ivy.design.utils.padding
 

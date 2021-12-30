@@ -1,4 +1,4 @@
-package com.ivy.design.level2
+package com.ivy.design.l2_components
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -22,10 +22,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.widget.addTextChangedListener
 import com.ivy.design.UI
-import com.ivy.design.level0.Purple1Dark
-import com.ivy.design.level0.Purple1Light
-import com.ivy.design.level0.Transparent
-import com.ivy.design.level0.style
+import com.ivy.design.l0_system.Purple1Dark
+import com.ivy.design.l0_system.Purple1Light
+import com.ivy.design.l0_system.Transparent
+import com.ivy.design.l0_system.style
 import com.ivy.design.utils.*
 import kotlin.math.roundToInt
 

@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.sp
 import com.ivy.design.R
 import com.ivy.design.Theme
 import com.ivy.design.api.IvyDesign
-import com.ivy.design.level0.*
+import com.ivy.design.l0_system.*
 
 abstract class IvyWalletDesign : IvyDesign {
 

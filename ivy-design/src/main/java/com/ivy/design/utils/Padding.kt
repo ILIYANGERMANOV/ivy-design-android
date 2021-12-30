@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.ivy.design.level1.data.IvyPadding
+import com.ivy.design.l1_buildingBlocks.data.IvyPadding
 
 fun Modifier.ivyPadding(ivyPadding: IvyPadding): Modifier {
     return this.padding(

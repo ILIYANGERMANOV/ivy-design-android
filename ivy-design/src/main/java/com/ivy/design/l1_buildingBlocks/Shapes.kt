@@ -1,4 +1,4 @@
-package com.ivy.design.level1
+package com.ivy.design.l1_buildingBlocks
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

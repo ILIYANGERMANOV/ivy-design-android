@@ -14,9 +14,9 @@ import androidx.compose.ui.unit.dp
 import com.ivy.design.api.IvyUI
 import com.ivy.design.api.ivyContext
 import com.ivy.design.api.systems.IvyWalletDesign
-import com.ivy.design.level0.colorAs
-import com.ivy.design.level1.*
-import com.ivy.design.level2.*
+import com.ivy.design.l0_system.colorAs
+import com.ivy.design.l1_buildingBlocks.*
+import com.ivy.design.l2_components.*
 import com.ivy.design.utils.IvyPreview
 import com.ivy.design.utils.onEvent
 import com.ivy.design.utils.padding

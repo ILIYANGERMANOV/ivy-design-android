@@ -1,4 +1,4 @@
-package com.ivy.design.level0
+package com.ivy.design.l0_system
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
