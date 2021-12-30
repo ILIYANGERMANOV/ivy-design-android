@@ -1,10 +1,13 @@
 package com.ivy.design.level1
 
+import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import com.ivy.design.utils.keyboardHeightState
+import com.ivy.design.utils.keyboardHeightStateAnimated
 
 @Composable
 fun SpacerV(
@@ -35,6 +38,16 @@ fun ColumnScope.SpacerWeight(
 }
 
 @Composable
-fun SpacerKeyboardHeight() {
-    SpacerV(height = keyboardHeightState().value)
+fun SpacerKeyboardHeight(
+    animation: AnimationSpec<Dp>? = null
+) {
+    if (animation != null) {
+        val heightAnimated by keyboardHeightStateAnimated(
+            animationSpec = animation
+        )
+        SpacerV(height = heightAnimated)
+    } else {
+        val height by keyboardHeightState()
+        SpacerV(height = height)
+    }
 }

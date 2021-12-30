@@ -5,6 +5,8 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.compose.animation.core.AnimationSpec
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.Dp
@@ -33,6 +35,19 @@ fun View.hideKeyboard() {
     val imm: InputMethodManager =
         context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(windowToken, 0)
+}
+
+@Composable
+fun keyboardHeightStateAnimated(
+    animationSpec: AnimationSpec<Dp> = springBounce()
+): State<Dp> {
+    val keyboardVisible by keyboardVisibleState()
+
+    return animateDpAsState(
+        animationSpec = animationSpec,
+        targetValue = if (keyboardVisible)
+            keyboardOnlyWindowInsets().bottom.toDensityDp() else 0.dp
+    )
 }
 
 @Composable

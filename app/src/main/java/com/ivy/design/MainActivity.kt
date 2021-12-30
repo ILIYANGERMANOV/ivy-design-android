@@ -44,6 +44,10 @@ class MainActivity : ComponentActivity() {
         ) {
             SpacerV(24.dp)
 
+//            SpacerKeyboardHeight(
+//                animation = springBounceVerySlow()
+//            )
+
             IvyText(
                 text = "Hello, Ivy Design!",
                 typo = UI.typo.h1.colorAs(UI.colors.primary),
