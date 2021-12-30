@@ -9,7 +9,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
 
 @Composable
 fun <T> densityScope(densityScope: @Composable Density.() -> T): T {
@@ -58,4 +60,17 @@ fun onEvent(
         logic()
         onDispose { cleanUp() }
     }
+}
+
+@Composable
+fun Dp.toDensityPx() = densityScope { toPx() }
+
+@Composable
+fun Int.toDensityDp() = densityScope { toDp() }
+
+@Composable
+fun Float.toDensityDp() = densityScope { toDp() }
+
+fun openUrl(uriHandler: UriHandler, url: String) {
+    uriHandler.openUri(url)
 }

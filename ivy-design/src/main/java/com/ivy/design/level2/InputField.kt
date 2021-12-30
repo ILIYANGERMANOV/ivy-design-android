@@ -30,7 +30,6 @@ import com.ivy.design.utils.*
 import kotlin.math.roundToInt
 
 
-//TODO: Support setting focus
 /**
  * Limitations:
  * - font cannot be set
@@ -177,12 +176,14 @@ private fun EditText.dynamicStyle(
             InputType.TYPE_CLASS_NUMBER
         }
     }
-    imeOptions = when (imeAction) {
-        IvyImeAction.DONE -> EditorInfo.IME_ACTION_DONE
-        IvyImeAction.NEXT -> EditorInfo.IME_ACTION_NEXT
-    }
+
     if (inputType != IvyInputType.LONG_TEXT) {
         //Make sure we don't break the default new line action
+        imeOptions = when (imeAction) {
+            IvyImeAction.DONE -> EditorInfo.IME_ACTION_DONE
+            IvyImeAction.NEXT -> EditorInfo.IME_ACTION_NEXT
+        }
+
         setOnEditorActionListener { _, _, _ ->
             if (onImeActionListener != null) {
                 onImeActionListener(this)

@@ -5,6 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -13,10 +15,7 @@ import com.ivy.design.api.IvyUI
 import com.ivy.design.api.ivyContext
 import com.ivy.design.api.systems.IvyWalletDesign
 import com.ivy.design.level0.colorAs
-import com.ivy.design.level1.ColumnRoot
-import com.ivy.design.level1.DividerH
-import com.ivy.design.level1.IvyText
-import com.ivy.design.level1.SpacerV
+import com.ivy.design.level1.*
 import com.ivy.design.level2.*
 import com.ivy.design.utils.IvyPreview
 import com.ivy.design.utils.onEvent
@@ -40,7 +39,9 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun UI() {
-        ColumnRoot {
+        ColumnRoot(
+            modifier = Modifier.verticalScroll(rememberScrollState())
+        ) {
             SpacerV(24.dp)
 
             IvyText(
@@ -120,6 +121,10 @@ class MainActivity : ComponentActivity() {
             ) {
                 ivyContext.switchTheme(ivyContext.theme.inverted())
             }
+
+            SpacerWeight(weight = 1f)
+            SpacerKeyboardHeight()
+            SpacerV(height = 48.dp) //extra scroll of 48.dp
         }
     }
 

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
+import com.ivy.design.utils.keyboardHeightState
 
 @Composable
 fun SpacerV(
@@ -31,4 +32,9 @@ fun ColumnScope.SpacerWeight(
     weight: Float
 ) {
     Spacer(Modifier.weight(weight))
+}
+
+@Composable
+fun SpacerKeyboardHeight() {
+    SpacerV(height = keyboardHeightState().value)
 }
