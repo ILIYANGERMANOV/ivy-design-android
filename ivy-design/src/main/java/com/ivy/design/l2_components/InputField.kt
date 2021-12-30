@@ -52,7 +52,7 @@ fun InputField(
     focus: InputFieldFocus? = null,
     onTextChanged: (String) -> Unit
 ) {
-
+    //TODO: The input field is a bit laggy maybe because of dynamicStyle(), fix it!
     AndroidView(
         modifier = modifier,
         factory = {
@@ -145,6 +145,7 @@ private fun EditText.dynamicStyle(
             InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
         }
         IvyInputType.LONG_TEXT -> {
+            //TODO: LONG TEXT doesn't have suggestions, fix it
             InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
         }
         IvyInputType.NAMES -> {
@@ -192,7 +193,7 @@ private fun EditText.dynamicStyle(
     when (inputType) {
         IvyInputType.LONG_TEXT -> {
             isSingleLine = false
-            imeOptions = EditorInfo.IME_FLAG_NO_ENTER_ACTION;
+            imeOptions = EditorInfo.IME_FLAG_NO_ENTER_ACTION
         }
         else -> {
             //do nothing
