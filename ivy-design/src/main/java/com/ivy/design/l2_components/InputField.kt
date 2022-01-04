@@ -62,16 +62,18 @@ fun InputField(
                 setPadding(0, 0, 0, 0)
                 setHint(hint)
 
+                setupInputType(
+                    inputType = inputType,
+                    imeAction = imeAction,
+                    onImeActionListener = onImeActionListener
+                )
+
                 dynamicStyle(
                     cursorColor = cursorColor,
                     highlightColor = highlightColor,
 
                     textStyle = textStyle,
                     hintStyle = hintStyle,
-
-                    inputType = inputType,
-                    imeAction = imeAction,
-                    onImeActionListener = onImeActionListener
                 )
 
                 addTextChangedListener { editable ->
@@ -90,11 +92,21 @@ fun InputField(
 
                 textStyle = textStyle,
                 hintStyle = hintStyle,
-
-                inputType = inputType,
-                imeAction = imeAction,
-                onImeActionListener = onImeActionListener
             )
+
+            when (inputType) {
+                IvyInputType.PASSWORD, IvyInputType.PASSWORD_NUMBER,
+                IvyInputType.PASSWORD_VISIBLE, IvyInputType.PASSWORD_NUMBER_VISIBLE -> {
+                    it.setupInputType(
+                        inputType = inputType,
+                        imeAction = imeAction,
+                        onImeActionListener = onImeActionListener
+                    )
+                }
+                else -> {
+                    //do nothing, no need to set input type
+                }
+            }
 
             //Log focus.triggerRecomposition so recomposition can be triggered
             Log.d("ivyInputField", "Triggering recomposition: ${focus?.triggerRecomposition}")
@@ -116,10 +128,6 @@ private fun EditText.dynamicStyle(
 
     textStyle: TextStyle,
     hintStyle: TextStyle,
-
-    inputType: IvyInputType,
-    imeAction: IvyImeAction,
-    onImeActionListener: ((EditText) -> Unit)?
 ) {
     val originalSelection = this.selectionEnd
 
@@ -140,6 +148,15 @@ private fun EditText.dynamicStyle(
     setHintTextColor(hintStyle.color.toArgb())
     //hint text alignment cannot be set to EditText
 
+    //restore original selection
+    setSelection(originalSelection)
+}
+
+fun EditText.setupInputType(
+    inputType: IvyInputType,
+    imeAction: IvyImeAction,
+    onImeActionListener: ((EditText) -> Unit)?
+) {
     this.inputType = when (inputType) {
         IvyInputType.SHORT_TEXT -> {
             InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
@@ -199,9 +216,6 @@ private fun EditText.dynamicStyle(
             //do nothing
         }
     }
-
-    //restore original selection
-    setSelection(originalSelection)
 }
 
 fun EditText.selectTextEnd() {
@@ -227,7 +241,8 @@ enum class IvyImeAction {
 }
 
 class InputFieldFocus {
-    private var requestFocus = false
+    var requestFocus: Boolean by mutableStateOf(false)
+        private set
     var triggerRecomposition: Int by mutableStateOf(0)
         private set
 
