@@ -52,7 +52,6 @@ fun InputField(
     focus: InputFieldFocus? = null,
     onTextChanged: (String) -> Unit
 ) {
-    //TODO: The input field is a bit laggy maybe because of dynamicStyle(), fix it!
     AndroidView(
         modifier = modifier,
         factory = {
