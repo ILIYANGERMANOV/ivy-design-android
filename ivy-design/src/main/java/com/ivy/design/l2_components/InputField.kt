@@ -145,8 +145,8 @@ private fun EditText.dynamicStyle(
             InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
         }
         IvyInputType.LONG_TEXT -> {
-            //TODO: LONG TEXT doesn't have suggestions, fix it
-            InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
+            InputType.TYPE_CLASS_TEXT or
+                    InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
         }
         IvyInputType.NAMES -> {
             InputType.TYPE_TEXT_VARIATION_PERSON_NAME or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
